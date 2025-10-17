@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris Flower Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+            color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            width: 420px;
+            background: #fff;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 40px 35px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #34495e;
+        }
+
+        input {
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fafafa;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #0078d7;
+            outline: none;
+            background-color: #fff;
+        }
+
+        button {
+            margin-top: 10px;
+            background-color: #0078d7;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        .result {
+            background: #f9fafb;
+            border: 1px solid #e1e4e8;
+            border-left: 5px solid #0078d7;
+            border-radius: 6px;
+            margin-top: 25px;
+            padding: 15px;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .result strong {
+            color: #0078d7;
+        }
+
+        .refresh {
+            background: none;
+            border: none;
+            color: #0078d7;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 450px) {
+            .wrapper {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1><i class="fa-solid fa-flask-vial"></i> Iris Flower Prediction</h1>
+        <form method="post">
+            <div class="input-group">
+                <label for="sepal_length">Sepal Length (cm)</label>
+                <input type="number" step="0.1" name="sepal_length" id="sepal_length" required>
+            </div>
+            <div class="input-group">
+                <label for="sepal_width">Sepal Width (cm)</label>
+                <input type="number" step="0.1" name="sepal_width" id="sepal_width" required>
+            </div>
+            <div class="input-group">
+                <label for="petal_length">Petal Length (cm)</label>
+                <input type="number" step="0.1" name="petal_length" id="petal_length" required>
+            </div>
+            <div class="input-group">
+                <label for="petal_width">Petal Width (cm)</label>
+                <input type="number" step="0.1" name="petal_width" id="petal_width" required>
+            </div>
+            <button type="submit"><i class="fa-solid fa-microscope"></i> Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            <p><strong>Features:</strong> {{ features }}</p>
+            <p><strong>Predicted Class:</strong> {{ prediction }}</p>
+        </div>
+        <button class="refresh" onclick="window.location.reload()"><i class="fa-solid fa-rotate"></i> Try Again</button>
+        {% endif %}
+
+        <footer>Powered by <strong>FastAPI</strong> & <strong>RandomForest</strong></footer>
+    </div>
+</body>
+</html>
